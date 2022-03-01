@@ -1,0 +1,251 @@
+    <!DOCTYPE html>
+    <html>
+    <!-- THis was changed too!!! -->
+    <head>
+      <meta charset="utf-8">
+      <title></title>
+      <meta name="author" content="">
+      <meta name="description" content="">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="shortcut icon" href="images/ico/favicon.ico"> 
+      <!-- Shuts up Chrome https://www.w3.org/2005/10/howto-favicon  with "#" as href
+        https://www.cloudsavvyit.com/104/how-to-set-up-fancy-icons-favicons-for-your-website/
+        https://favicon.io/emoji-favicons/ -->
+       
+        <!-- for split flap functionality -->
+      <link href="styles/splitFlap.css" rel="stylesheet">
+    <!-- for word & voice functionality -->
+      <link href="styles/main.css" rel="stylesheet">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+      <!-- move these to the bottom of the page? -->
+      <!-- <script type='text/javascript' src='scripts/config.js'></script> -->
+      <script src="scripts/app.js" defer></script> <!-- defer -->
+     
+      <script src="scripts/CSScolorNames.js" defer></script>
+      <script src="scripts/wordArray2k.js" defer></script>
+      <script src="scripts/wordArray10k.js" defer></script>
+      <script src="scripts/animalsArray.js" defer></script>
+      <script src="scripts/kindergardenArray.js" defer></script>
+      <script src="scripts/firstGradeArray.js" defer></script>
+      <script src="scripts/disneyCharactersArray.js" defer></script>
+      <script src="scripts/disneyMoviesArray.js" defer></script>
+    
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+      <link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@500&display=swap" rel="stylesheet">
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js" integrity="sha512-Tn2m0TIpgVyTzzvmxLNuqbSJH3JP8jm+Cy3hvHrW7ndTDcJ1w5mBiksqDBb8GpE2ksktFvDB/ykZ0mDpsZj20w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    </head>
+    <body>
+    
+  
+    <section id="display_board">
+      <div id="display_board_X" class="display_board_container board">
+        <!-- On the panel display, wrapps all elements -->
+      </div> 
+    
+      <!-- --------- BIG SINGLE FLIP CHARACTER --------- -->
+      <div id="pos_1_" class="element_wrapper " style="display:none">
+      <div class="element" > 
+        <div class="hilight"></div>
+        <div class="top_back_shadow"></div>
+        <h1>
+          <div class="top shadows_R3">7</div>
+          <div class="shadow"></div>
+          <div class="hub">
+            <div></div>
+            <div></div>
+          </div>
+          <div class="bottom">7</div>
+        </h1>
+      
+        <div class="flap ">
+          <div class="front item shadows_R3">
+             <div class="hub"> 
+              <div></div>
+              <div></div>
+            </div>
+            <h1>7</h1>
+          </div>
+          <div class="back">
+            <div class="back_shine"></div>
+            <div class="hub">
+              <div></div>
+              <div></div>
+            </div>
+            <h1>
+            <!--  doesn't actually need a starting character -->
+            </h1>
+          </div>    
+        </div><!-- end .flap -->
+      </div><!-- END .element flip char item -->
+      </div><!-- END .element_wrapper -->
+      <!-- --------- END SINGLE FLIP CHARACTER --------- -->
+    
+      <div id="syl_wrapper"></div>
+    
+    
+    </section> 
+    
+    
+    <!-- TO DO   -->
+    <!-- I don't believe I am going to use this, after all. copy this and it's css to the other words app then destroy -->
+    <!-- <section id="pronunciation_display" class="pronunciation_display"> -->
+      <!-- <div class="part_title">syllables: <span id="syllables"> ------ </span> </div> -->
+      <!-- <div class="part_title">Pronunciation: <span id="pronunciation"> ------- </span> </div> -->
+    <!-- </section>   -->
+    
+    
+    <section class="definition_display">
+      <div class="def_wrapper">
+         <span id="speak_definition" class="speak_this material-icons md-32"> record_voice_over </span>
+         <span id="definition" class="definition">definition</span>
+        </div>
+    </section>
+    
+    
+    
+    <section id="word_controls" class="word_controls">
+    <!-- This works, but it's ugyly. 
+    Generate it from js based on the array of arrays -->
+    <div class="category_wrapper select">
+      <label for="category">Category:</label>
+      <select name="category" id="category">
+        <option value="0" id="Disney" >Disney</option>
+        <option value="1" id="Animals" >Animals</option>
+        <option value="2" id="Kindergarden" selected>Kindergarden</option>
+        <option value="3" id="FirstGrade" selected>1st grade</option>
+        <option value="4" id="Random" selected>Random</option>
+        <option value="5" id="Popular" >Most Popular</option>  
+        <option value="6" id="Colors" >Colors</option>
+      </select> 
+    </div>
+    
+    <button id="get_word" class="flipper">New Word</button>
+    
+      <div id="word_length_wrapper" class="slider_with_controls">
+        <label>Word Length</label>
+        <div class="word_length_container">
+          <span class="slider_left_val"><span class="material-icons"> remove_circle </span></span>
+          <span class="switch"><!-- was label -->
+            <!-- add ltr to input class for reversing directin of value -->
+            <input type="range" min="2" max="20" value="5" step="1" class="slider " id="word_length">
+            <span class="slip round"> </span>
+          </span><span class="slider_right_val"><span class="material-icons "> add_circle </span> </span>
+        </div>
+      </div>   
+    </section>  
+    
+    
+    
+    <section class="control_panel">
+      <div id="section_tabs" class="multi_state_button_wrapper">
+        <!-- <label>Capitalization</label> -->  
+        <div class="multi_state_buttons">
+        <div data-value="voice_controls" class="section_state_button state_button"><span class="material-icons">hearing</span></div> 
+        <div data-value="display_controls" class="section_state_button state_button"><span class="material-icons">visibility</span> </div>
+        <div data-value="search_controls" class="section_state_button state_button"><span class="material-icons">search</span></div>
+        <div data-value="user_name" class="section_state_button state_button"><span class="material-icons "> fingerprint </span></div>
+        </div>
+      </div>
+    </section>
+    
+    
+    <section id="user_name" class="controls">
+      <span id="speak_user" class=" speak_this material-icons md-32"> record_voice_over </span>
+      <input type="text" id="user_name_input" placeholder="Your Name?" class="large_input">
+    </section>
+    
+    <section id="search_controls" class="controls">
+      <span id="speak_input" class=" speak_this material-icons md-32"> record_voice_over </span>
+      <input type="text" id="search_input" placeholder="Search for..." class="large_input">
+    </section>
+    
+    <section id="display_controls" class="controls">  
+        <div id="message_speed_wrapper" class="slider_with_controls">
+          <label>Change The Word</label>
+          <div class="message_speed_container">
+            <span class="slider_left_val"><span class="material-icons"> remove_circle </span></span>
+            <span class="switch">
+              <input type="range" min="10" max="3000" value="500" class="slider rtl" id="message_speed_slider">
+              <span class="slip round"> </span>
+            </span><span class="slider_right_val"><span class="material-icons "> add_circle </span></span>
+          </div>
+        </div>  
+        
+        <div class="multi_state_button_wrapper">
+          <!-- <label>Capitalization</label> -->  
+          <div class="multi_state_buttons">
+          <div id="uppercase" data-value="uppercase" class="case_state_button state_button">AAAAA</div> 
+          <div id="capitalize" data-value="capitalize" class="case_state_button state_button active_msb">Aaaaa</div>
+          <div id="lowercase" data-value="lowercase" class="case_state_button state_button">aaaaa</div>
+          </div>
+        </div>
+    
+        <div id="flip_speed_wrapper" class="slider_with_controls">
+          <label>Flip Speed</label>
+          <div class="flip_speed_container">
+            <span class="slider_left_val"><span class="material-icons"> remove_circle </span></span>
+            <span class="switch">
+              <input type="range" min="20" max="300" value="60" class="slider rtl" id="flip_speed_slider">
+              <span class="slip round"> </span>
+            </span><span class="slider_right_val"><span class="material-icons "> add_circle </span></span>
+          </div>
+        </div>
+    </section>
+    
+    
+    
+    
+    <section id="voice_controls" class="controls"> 
+        <div id="voice_speed_wrapper" class="slider_with_controls">
+          <label>Voice Speed</label>
+          <div class="voice_speed_container">
+            <span class="slider_left_val"><span class="material-icons"> remove_circle </span></span>
+            <span class="switch"> <!-- was label -->
+              <!-- add ltr to input class for reversing directin of value -->
+              <input class="slider" type="range" min="0.5" max="2" value="1" step="0.1" class="slider " id="rate">
+              <span class="slip round"> </span>
+            </span><span class="slider_right_val"><span class="material-icons "> add_circle </span></span>
+          </div>
+        </div>  
+       
+        <div class="voice_list_wrapper select">
+          <label for="voice_list">Voice:</label>
+        <select name="voice_list" id="voice_list"></select>
+      <!-- <div class="voice_icons">
+        <label for="voice">Voice:</label>
+        <div id="voiceList" name="voiceList" > </div> 
+      </div> -->
+        </div>
+    
+        <div id="voice_pitch_wrapper" class="slider_with_controls">
+          <label>Voice Pitch</label>
+          <div class="voice_pitch_container">
+            <span class="slider_left_val"><span class="material-icons"> remove_circle </span></span>
+            <span class="switch"><!-- was label -->
+              <!-- add ltr to input class for reversing directin of value -->
+              <input type="range" min="0" max="2" value="1" step="0.1" class="slider " id="pitch">
+              <span class="slip round"> </span>
+            </span><span class="slider_right_val"><span class="material-icons "> add_circle </span></span>
+          </div>
+        </div>
+    </section>  
+    
+    
+    
+    
+    
+    <section class="voice_play ">
+        <!-- <span id="speak_word" class="material-icons md-60"> record_voice_over </span> -->
+        <!-- <span id="user_name" class="material-icons md-60"> fingerprint </span> -->
+        <span id="reward" class="material-icons md-60"> thumb_up </span>
+    </section>
+    
+    <a href="/.netlify/functions/word"> word function as a new deploy</a>
+    
+    </body>
+    </html>
+    

@@ -1,0 +1,731 @@
+body {
+  margin:0; 
+  padding:0;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  background-color: var(--body-color);
+  /* overflow:hidden; */
+}
+
+
+*, *::before, *::after { box-sizing: border-box; /* gives padding and border from inside */
+}
+
+:root {
+  --black-20: #000000;
+  --black-19: #1a1a1a;
+  --black-18: #1d1d1d;
+  --black-17: #202020;
+  --black-16: #232323;
+  --black-15: #252525;
+  --black-14: #2a2a2a;
+  --black-13: #2f2f2f;
+  --black-12: #343434;
+  --black-11: #464646;
+  --black-10: #4c4c4c;
+  --black-9: #515151;
+  --black-8: #575757;
+  --black-7: #5c5c5c;
+  --black-6: #727272;
+  --black-5: #9e9e9e;
+  --black-4: #cacaca;
+  --black-3: #e0e0e0;
+  --black-2: #ebebeb;
+  --black-1: #f5f5f5; /* whitesmoke */
+
+  --body-color: #90b4bd;
+  --hilight-color: pink; 
+  --main-background: #1a1a1a;  /*  rgb(22,22,22);  */
+
+  --text-case: lowercase; /*  uppercase,  capitalize */
+  --med-radius: 5px;
+ }  
+
+body {
+transition: background-color 0.3s ease-in;
+/* font-family: 'Open Sans', sans-serif; */
+font-family: 'Azeret Mono', monospace;
+background-color: hsl(0, 0%, 41%); 
+}
+
+
+
+
+
+/* overriding the splitFlap.css JUST FOR THIS APPLICATION */
+
+/* main background  - - - coppied from master*/
+.display_board_container {
+      /* background: rgb(101,101,101); */
+      /* background: linear-gradient(175deg, rgba(101,101,101,1) 0%, rgba(68,68,68,1) 5%, rgba(0,0,0,1) 100%);  */
+      width: 100vw;
+      height: auto; /* 30vh was 100 on original */
+      /* padding: 0px;  */
+      /* margin-bottom: 0px;  */
+      display:flex;
+      flex-direction: row;
+      flex-wrap: wrap; 
+justify-content: left;  /* center  works on the main (row=hor/col=vert) axis */
+      align-items:center;   /* works on the cross (row=hor/col=vert) axis  */
+      transform-origin: center center;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      border-radius: 5px;
+      /* -webkit-box-shadow: 2px 2px 7px -1px #5D5D5D, -2px -2px 7px -1px #000000, inset -2px -2px 6px -1px #000000, inset 2px 2px 3px -1px #5D5D5D;  */
+      /* box-shadow: 2px 2px 7px -1px #5D5D5D, -2px -2px 7px -1px #000000, inset -2px -2px 6px -1px #000000, inset 2px 2px 3px -1px #5D5D5D; */
+      /* transform: scale(50%); */
+      /* border: 1px solid red; */
+      margin-left:20px;
+}
+/* The margin-left, above, probably throws off the calculations in the js on how many characters to render
+re-visit this and fix if needed.  */
+
+
+/* main background  - - - coppied from master*/
+section#display_board {
+background: rgb(101,101,101);
+background: linear-gradient(175deg, rgba(101,101,101,1) 0%, rgba(68,68,68,1) 5%, rgba(0,0,0,1) 100%); 
+width: 100vw;
+height: auto; /* 30vh was 100 on original */
+padding-top: 20px; /*  was 0 on original */
+padding-bottom: 10px; /*  was 0 on original */
+margin-bottom: 20px; 
+display:flex;
+flex-direction: row;
+flex-wrap: wrap; 
+justify-content: left;  /* center  works on the main (row=hor/col=vert) axis */
+align-items:center;   /* works on the cross (row=hor/col=vert) axis  */
+transform-origin: center center;
+/* -webkit-border-radius: 5px; */
+/* -moz-border-radius: 5px; */
+/* border-radius: 5px; */
+-webkit-box-shadow: 2px 2px 7px -1px #5D5D5D, -2px -2px 7px -1px #000000, inset -2px -2px 6px -1px #000000, inset 2px 2px 3px -1px #5D5D5D; 
+box-shadow: 2px 2px 7px -1px #5D5D5D, -2px -2px 7px -1px #000000, inset -2px -2px 6px -1px #000000, inset 2px 2px 3px -1px #5D5D5D;
+/* transform: scale(50%); */
+}
+
+
+
+
+
+
+
+/* word length label */
+#word_length_wrapper > label:nth-child(1) {
+text-transform: var(--text-case);
+}
+
+
+
+
+/* ======================================================= */
+/* ==================      F O R M       ================= */
+/* ==================    I N P U T S     ================= */
+/* ==================        &           ================= */
+/* ==================   E L E M E N T S  ================= */
+/* ======================================================= */
+
+section.pronunciation_display {
+display: flex;
+justify-content: space-around; /* space-around/space-between/center */
+}
+.part_title #syllables, .part_title #pronunciation {
+padding: 10px 0px 7px 11px; /* top right bottom left*/
+margin: 0px 30px 0px 0px;
+background-color: yellow;
+border-radius: var(--med-radius);
+}
+
+#syllables span{
+font-size: 22px;
+width:auto;
+height: auto;
+cursor: pointer;
+/* margin-right: is done via a blank space placed in the JS when the span is created */
+}
+
+
+
+
+
+section.definition_display{
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+align-content: center; 
+justify-content: center; 
+/* text-align: center; */
+max-width: 80vw;
+min-height: 45px;
+}
+
+.definition::first-letter {
+  text-transform: uppercase
+}
+
+
+div.def_wrapper {
+/* Why won't this cventer the friken text vertically?!?!? */
+display:flex;
+align-items: center; 
+justify-content: center; 
+}
+
+div.def_wrapper .material-icons{
+margin-right: 17px;
+}
+
+.look_this_up {
+font-style:oblique;
+}
+.look_this_up:hover {
+cursor: pointer;
+text-decoration: underline;
+}
+
+
+
+/* section.definition_display {
+border: 1px solid violet;
+}
+
+section.pronunciation_display {
+border: 1px solid yellow;
+}
+
+section#search_controls {
+border: 1px solid red;
+}
+  
+section#word_controls {
+border: 1px solid green;
+}
+section.word_length {
+border: 1px solid navy;
+}
+section.voice_play {
+border: 1px solid cyan;
+}
+section#voice_controls {
+border: 1px solid rgb(255, 230, 0);
+}
+section.word_controls {
+border: 1px solid steelBlue;
+} */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+html body form select {
+margin-bottom: 0px;
+}
+/* dev only. delete for deployment */
+.buttons_dev{
+position: absolute;
+top:20px;
+display:flex;
+justify-content: center; 
+padding: 10px;
+}
+
+.flipper {
+min-width: 20vw;
+position: relative;
+font-family: 'Raleway', sans-serif;
+font-size: 2rem;
+font-weight: 800;
+letter-spacing: 5px;
+text-transform: uppercase;
+cursor: pointer;
+background-color: var(--black-15, rgba(100,100,100,0.5) );
+color: var(--black-4, rgba(100,100,100,0.5) );
+border-radius: 10px;
+padding: 15px 15px 10px 15px; /* top right bottom left*/
+margin: 20px 20px 20px 20px;
+border:4px solid black; 
+}
+
+.flipper:hover {
+background-color: var(--black-10, rgba(10,10,10,0.5) ); 
+color: var(--black-15, rgba(100,100,100,0.99) );
+}
+
+
+
+.button_with_controls{
+display: flex;  
+flex-direction: column;
+align-content: center; 
+justify-content: center; 
+/* transform-origin: bottom left; */
+}
+
+  .slider_with_controls{
+    display: flex;  
+    flex-direction: column;
+    align-content: center; 
+    justify-content: center; 
+    /* margin-bottom:15px;  */
+    margin-left: 0px;
+    /* width: 250px; */
+  }
+
+  /* for the left and right label spans  */
+  .slider_with_controls span:not(.slip), .slider_with_controls span:not(.material-icons)   {
+    /* font-family: 'Azeret Mono', monospace; */
+    /* font-size:14px; */
+    line-height: 23px;
+    /* filter: blur(0.7px);  */
+    color: var(--black-12);
+  }
+  /* align/distribute slider and spans  */
+  .slider_with_controls div:first-of-type{
+    display: flex;  
+    justify-content: center;
+    /* justify-content: space-between; */
+  }
+
+  .slider_with_controls input {
+    width: 90px;
+  }
+
+  /* min dist tween slider and spans  */
+  .slider_with_controls .switch{
+    margin: 0px 5px;
+  }
+
+  /* for the label  */
+  .slider_with_controls label:first-of-type{
+    font-family: 'Azeret Mono', monospace;
+    text-align: center;
+    margin-bottom:5px;
+  }
+
+  .rtl {
+    direction: rtl; 
+  }
+
+
+  
+  
+.material-icons {
+cursor: pointer;
+
+}
+.material-icons.md-60 { font-size: 60px; margin:0px 20px;}
+.material-icons.md-32 { font-size: 32px;   }
+.material-icons.md-24 { font-size: 24px;   }
+.material-icons.md-16 { font-size: 16px;   }
+
+#display_board_X #speak_word {
+margin-right: 5px;
+margin-left: 0px;
+}
+  
+/* .select{
+display: flex;  
+flex-direction: column;
+align-content: flex-start; 
+justify-content: center; 
+}  */
+
+.select label{
+padding-bottom: 5px;
+}
+
+.category_wrapper, .voice_list_wrapper {
+flex-direction: row;
+/* align-items: center; */
+align-content: center;
+justify-content: center ;
+}
+
+/* there has to be a better way than this */
+/* add l/r margin to whatever element is in the center */
+.voice_list_wrapper {
+margin: 0 30px;
+}
+
+.flip_controls_wrapper {
+display: flex;  
+align-content: center; 
+justify-content: space-between;
+margin-bottom:20px;
+/* transform-origin: bottom left; */
+}
+
+
+
+
+/* ======================================================= */
+/* ==================      M U L T I     ================= */
+/* ==================      S T A T E     ================= */
+/* ==================    B U T T O N S   ================= */
+/* ======================================================= */
+.multi_state_button_wrapper { 
+display: flex; 
+flex-direction:column;
+align-content: center; 
+justify-content: center; 
+border-radius: 10px;
+padding: 0 30px;
+}
+/* .multi_state_title  */
+.multi_state_button_wrapper label {
+font-size: 1rem;
+text-align: center;
+margin-bottom: 5px;
+}
+.multi_state_buttons { 
+display: flex;   
+align-content: center; 
+justify-content: center; 
+border-radius:inherit;
+}
+.state_button {
+cursor:pointer;
+color: black;
+font-size:1.5rem;
+padding:2px 10px 5px 10px; /*top, right, bottom, left   */
+margin:0px 3px 0px 3px; /*top, right, bottom, left   */
+border-radius: 10px;
+border: 5px solid transparent;
+opacity: 0.3;
+}
+.state_button:hover{
+border:5px solid black;
+opacity: 0.4;
+}
+
+.active_msb {
+color: black;
+border:5px solid black;
+opacity: 1;
+transition: opacity 1000ms; 
+} 
+
+
+
+
+
+/* ===================================================== */
+/* ==================         48       ================= */
+/* ==================     V O I C E    ================= */
+/* ==================    P E O P L E   ================= */
+/* ===================================================== */
+#voiceList input[type="radio"]{
+-webkit-appearance: none;
+-moz-appearance:none;
+appearance:none
+}
+/* the icon and the text */
+#voiceList label{ 
+display:flex;
+flex-direction: column;
+justify-content: flex-start;
+height: 40px;
+position: relative;
+color: rgba(100,100,100,0.4);
+transition: 0.5s;
+width: auto; 
+}  
+
+#voiceList label:hover {
+color: rgba(100,100,100,0.7);
+}
+
+#voiceList .fa-user {
+font-size: 30px;  
+}
+
+/* just the text */
+#voiceList label>span { 
+font-size: 10px;
+font-family: "Poppins", sans-serif;
+position: absolute;
+top: 60%;
+left: 50%;
+transform: translate(-50%, 100%);
+}
+
+#voiceList input[type="radio"]:checked > label {
+color: rgba(0,0,0,1.0);
+}
+
+
+
+
+#word_length_wrapper {
+margin-top:30px;
+}
+#user_name {
+margin-bottom:30px;
+}
+#search_controls {
+margin-bottom:30px;
+}
+/* word_length_wrapper*/
+#word_length_wrapper.slider_with_controls {
+margin-top:0px;
+margin-bottom:0px;
+}
+.slider_with_controls {
+margin-bottom:30px;
+}
+.multi_state_button_wrapper {
+margin-bottom:30px;
+}
+.voice_list_wrapper {
+margin-bottom:30px;
+}
+
+
+
+
+
+.large_input {
+font-size: 1.5rem;
+width: 60vw;
+border: 3px solid var(--black-15, rgba(100,100,100,0.5) );
+border-radius: 8px;
+padding:8px;
+margin-left: 20px; 
+}
+
+#your_name::placeholder {
+color: var(--black-8);
+
+}
+#word_controls {
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+align-items: center; 
+  align-content: center; 
+justify-content: center; 
+}
+
+
+#user_name.controls {
+display: flex;
+align-items: center;
+}
+#search_controls.controls {
+display: flex;
+align-items: center;
+}
+#voice_controls.controls {
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+align-items: center; 
+  align-content: center; 
+justify-content: center; 
+}
+#view_controls.controls {
+display: flex;
+align-items: center;
+}
+#display_controls.controls {
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+align-items: center; 
+  align-content: center; 
+justify-content: center; 
+}
+
+
+/* how the syllable chunks are broken down under the main letter display */
+/* .syl_letter{ }
+.syl_whole{ } */
+.syl_chunk{
+display: flex;
+justify-content: space-between;
+opacity:10%
+}
+.syl_chunk:hover { 
+opacity:30%
+}
+
+#syl_wrapper {
+display:flex;
+height:auto;
+height:25px;
+}
+/* the horizontal curley brace under each syllable */
+.l_brace, .r_brace, .c_brace { 
+overflow: hidden;
+
+}
+
+.c_brace {
+flex-grow: 1;
+width: auto;
+background-image: url("/images/curley_brace_center.png");
+background-position: center top; 
+}
+.l_brace {
+width:16px;
+margin-left: 5px;
+background-image: url("/images/curley_brace_left.png");
+}
+.r_brace {
+width:16px;
+margin-right: 5px;
+background-image: url("/images/curley_brace_right.png");
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 
+
+this was going in the direction of using font braces "{, {, }"
+and rotating/cropping them to make the under-brace 
+too complicated and risky, going with SVG graphics instead
+.l_brace, .r_brace, .c_brace { 
+font-size: 60px;
+width: 38px;  
+overflow: hidden;
+text-orientation: mixed;
+border: 1px solid black;
+background-color: red;
+transform: rotate(180deg);
+-ms-transform: rotate(180deg);
+-webkit-transform: rotate(180deg);
+}
+.c_brace {
+flex-grow: 1;
+width: auto;
+writing-mode: vertical-rl;
+padding-bottom: 29px;
+}
+.l_brace {
+writing-mode: vertical-rl;
+line-height: 22px;
+padding-bottom: 29px;
+}
+.r_brace {
+writing-mode: vertical-lr;
+line-height: 50px;
+padding-bottom: 29px;
+} */
+
+
+
+/* 
+-webkit-transform: scale(2, 1);
+-moz-transform: scale(2, 1);
+-o-transform: scale(2, 1);
+transform: scale(2, 1);
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#get_me {
+   padding:20px;
+   width:400px;
+   border: 1px solid black; 
+   background-color:pink;
+   cursor: pointer;
+}
+
+
+.fade-in {
+    visibility: visible;
+    opacity: 1;
+    animation-name: fadeInOpacity;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in;
+    animation-duration: 1.5s;
+  }
+  
+  @keyframes fadeInOpacity {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
