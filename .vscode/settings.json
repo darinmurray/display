@@ -1,0 +1,43 @@
+{
+
+// from the 15(!)th answer on this SO question: https://stackoverflow.com/questions/40177331/what-is-the-shortcut-in-visual-studio-code-for-console-log
+// generating a print statement of the current word on the next line, in different languages
+"multiCommand.commands": [
+    {
+      "command": "multiCommand.jsGeneratePrint",
+      "sequence": [
+        "editor.action.addSelectionToNextFindMatch",
+        "editor.action.clipboardCopyAction",
+        "editor.action.insertLineAfter",
+        {
+          "command": "editor.action.insertSnippet",
+          "args": {
+            // "snippet": "console.log(\"=> $CLIPBOARD: \", $CLIPBOARD);"
+            "snippet": "console.log(`%c=> $CLIPBOARD: `, \"color:cyan\", $CLIPBOARD);"
+          }
+        },
+      ]
+    },
+    {
+      "command": "multiCommand.javaGeneratePrint",
+      "sequence": [
+        "editor.action.addSelectionToNextFindMatch",
+        "editor.action.clipboardCopyAction",
+        "editor.action.insertLineAfter",
+        {
+          "command": "editor.action.insertSnippet",
+          "args": {
+            "snippet": "System.out.println(\"$CLIPBOARD: \" + $CLIPBOARD);"
+          }
+        },
+      ]
+    },
+    
+  ],
+  "liveServer.settings.port": 5501,
+// end pasted
+
+
+
+
+}

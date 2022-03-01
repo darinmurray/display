@@ -48,6 +48,7 @@ body {
 transition: background-color 0.3s ease-in;
 /* font-family: 'Open Sans', sans-serif; */
 font-family: 'Azeret Mono', monospace;
+font-display: fallback;
 background-color: hsl(0, 0%, 41%); 
 }
 
@@ -255,6 +256,7 @@ padding: 10px;
 min-width: 20vw;
 position: relative;
 font-family: 'Raleway', sans-serif;
+font-display: fallback;
 font-size: 2rem;
 font-weight: 800;
 letter-spacing: 5px;
@@ -320,6 +322,7 @@ justify-content: center;
   /* for the label  */
   .slider_with_controls label:first-of-type{
     font-family: 'Azeret Mono', monospace;
+    font-display: fallback;
     text-align: center;
     margin-bottom:5px;
   }
@@ -465,6 +468,7 @@ font-size: 30px;
 #voiceList label>span { 
 font-size: 10px;
 font-family: "Poppins", sans-serif;
+font-display: fallback;
 position: absolute;
 top: 60%;
 left: 50%;
